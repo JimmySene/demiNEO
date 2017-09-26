@@ -1,0 +1,127 @@
+<div>
+  <form name="missionForm" ng-submit="$ctrl.submitForm(missionForm.$valid)" novalidate>
+  <h1>Demande {{$ctrl.mission.reference}}</h1>
+  <h4>
+    <a ng-href="https://www.google.com/maps/search/?api=1&query={{$ctrl.mapLink}}">{{$ctrl.mission.adresse}}</a>
+  </h4>
+  <div class="container">
+
+    <div class="row myCenter">
+      <div class="col-xs-12">
+        <label>Date publication : </label> <span> {{$ctrl.mission.datetime_publication | date: "dd/MM/yyyy 'à' HH:mm:ss"}}</span>
+      </div>
+    </div>
+
+    <div class="row myCenter">
+      <div class="col-xs-12">
+        <label>Dernière mise à jour : </label> <span> {{$ctrl.mission.datetime_maj | date: "dd/MM/yyyy 'à' HH:mm:ss"}}</span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-group input-group-lg" ng-class="{ 'has-error': missionForm.agent1.$invalid && $ctrl.submitted}">
+        <span class="input-group-addon">Agent 1</span>
+        <select class="form-control" ng-model="$ctrl.mission.id_agent1" name="agent1" required>
+          <option ng-repeat="a in $ctrl.agents" value="{{a.id}}">{{a.nom | uppercase }} {{a.prenom}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-group input-group-lg" ng-class="{ 'has-error': missionForm.agent2.$invalid && $ctrl.submitted}">
+        <span class="input-group-addon">Agent 2</span>
+        <select class="form-control" ng-model="$ctrl.mission.id_agent2" name="agent2" required>
+          <option ng-repeat="a in $ctrl.agents" value="{{a.id}}">{{a.nom | uppercase }} {{a.prenom}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-group input-group-lg" ng-class="{ 'has-error': missionForm.datetime_depart.$invalid && $ctrl.submitted}">
+        <span class="input-group-addon date" ng-click="$ctrl.initDate($event)">Départ LCPP</span>
+        <input ng-model="$ctrl.mission.datetime_depart" class="form-control" id='datetime_depart' name="datetime_depart" required/>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-group input-group-lg" ng-class="{ 'has-error': missionForm.datetime_debut.$invalid && $ctrl.submitted}">
+        <span class="input-group-addon date" ng-click="$ctrl.initDate($event)">Début mission</span>
+        <input ng-model="$ctrl.mission.datetime_debut" class="form-control" id='datetime_debut' name="datetime_debut" required/>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-group input-group-lg" ng-class="{ 'has-error': missionForm.type_lieu.$invalid && $ctrl.submitted}">
+        <span class="input-group-addon">Type lieu</span>
+        <select class="form-control" ng-model="$ctrl.mission.type_lieu" ng-change="$ctrl.change()" name="type_lieu" required>
+          <option value=""></option>
+          <option value="abri précaire">abri précaire</option>
+          <option value="appartement">appartement</option>
+          <option value="atelier">atelier</option>
+          <option value="autoroute">autoroute</option>
+          <option value="autre">autre</option>
+          <option value="bâtiment d'habitation">bâtiment d'habitation</option>
+          <option value="bâtiment industriel">bâtiment industriel</option>
+          <option value="camp">camp</option>
+          <option value="chantier">chantier</option>
+          <option value="cours d'eau ou étendue d'eau">cours d'eau ou étendue d'eau</option>
+          <option value="entrepôt">entrepôt</option>
+          <option value="établissement recevant du public">établissement recevant du public</option>
+          <option value="foret bois">foret bois</option>
+          <option value="immeuble d'habitations">immeuble d'habitations</option>
+          <option value="immeuble de bureaux">immeuble de bureaux</option>
+          <option value="immeuble de grande hauteur">immeuble de grande hauteur</option>
+          <option value="institutions">institutions</option>
+          <option value="parc de stationnement air libre">parc de stationnement air libre</option>
+          <option value="parc de stationnement couvert (hors ERP)">parc de stationnement couvert (hors ERP)</option>
+          <option value="parc et jardin">parc et jardin</option>
+          <option value="pavillon">pavillon</option>
+          <option value="terrain">terrain</option>
+          <option value="terrain industriel">terrain industriel</option>
+          <option value="transports publics">transports publics</option>
+          <option value="voie publique">voie publique</option>
+        </select>
+      </div>
+    </div>
+
+    <div ng-show='$ctrl.autreSelected' class="row">
+      <div class="input-group input-group-lg" ng-class="{ 'has-error': missionForm.autre.$invalid && $ctrl.submitted}">
+        <span class="input-group-addon">Précisez</span>
+        <input ng-model="$ctrl.mission.autre" class="form-control" name="autre" ng-required="$ctrl.mission.type_lieu == 'autre'"/>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-group input-group-lg" ng-class="{ 'has-error': missionForm.datetime_fin.$invalid && $ctrl.submitted}">
+        <span class="input-group-addon date" ng-click="$ctrl.initDate($event)">Fin mission</span>
+        <input ng-model="$ctrl.mission.datetime_fin" class="form-control" id='datetime_fin' name="datetime_fin" required/>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-group input-group-lg" ng-class="{ 'has-error': missionForm.datetime_retour.$invalid && $ctrl.submitted}">
+        <span class="input-group-addon date" ng-click="$ctrl.initDate($event)">Retour LCPP</span>
+        <input ng-model="$ctrl.mission.datetime_retour" class="form-control" id='datetime_retour' name="datetime_retour" required/>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-6">
+        <button type="reset" class="btn btn-warning btn-lg" ng-click="$ctrl.back()" style="width:100%;">Annuler</button>
+      </div>
+      <div class="col-xs-6">
+        <button type="submit" class="btn btn-success btn-lg" style="width:100%;">Envoyer</button>
+      </div>
+    </div>
+
+  </div>
+</form>
+  <script type="text/javascript">
+      $(function () {
+          $('#datetime_depart').bootstrapMaterialDatePicker({ format : 'YYYY-MM-DD HH:mm', lang : 'fr', weekStart : 1, cancelText : 'ANNULER' });
+          $('#datetime_debut').bootstrapMaterialDatePicker({ format : 'YYYY-MM-DD HH:mm', lang : 'fr', weekStart : 1, cancelText : 'ANNULER' });
+          $('#datetime_fin').bootstrapMaterialDatePicker({ format : 'YYYY-MM-DD HH:mm', lang : 'fr', weekStart : 1, cancelText : 'ANNULER' });
+          $('#datetime_retour').bootstrapMaterialDatePicker({ format : 'YYYY-MM-DD HH:mm', lang : 'fr', weekStart : 1, cancelText : 'ANNULER' });
+      });
+  </script>
+</div>

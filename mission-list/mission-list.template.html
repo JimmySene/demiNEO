@@ -1,0 +1,15 @@
+<div class="container-fluid">
+  <div class="row">
+
+    <div class="col-xs-12">
+
+      <ul>
+        <li class="mission" ng-repeat="mission in $ctrl.missions | orderBy: datetime_publication : true" ng-click='$ctrl.go(mission.id)'>
+          <h4>Demande {{mission.reference}}</h4>
+          <p>{{mission.adresse}}</p>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</div>

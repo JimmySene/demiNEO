@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en" ng-app="demineoApp">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <meta charset="utf-8">
+  <title>Demineo</title>
+  <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css" />
+  <link rel="stylesheet" href="lib/datepicker2/bootstrap-material-datetimepicker.css" />
+  <link rel="stylesheet" href="app.css" />
+
+  <script type="text/javascript" src="lib/jquery-3.2.1.js"></script>
+  <script type="text/javascript" src="lib/bootstrap/js/bootstrap.js"></script>
+  <script type="text/javascript" src="lib/moment.js"></script>
+  <script type="text/javascript" src="lib/fr.js"></script>
+  <script type="text/javascript" src="lib/datepicker2/bootstrap-material-datetimepicker.js"></script>
+
+  <!-- Sources angularJS -->
+  <script src="lib/angular/angular.js"></script>
+  <script src="lib/angular/angular-resource.js"></script>
+  <script src="lib/angular/angular-route.js"></script>
+
+  <script src="app.module.js"></script>
+  <script src="app.config.js"></script>
+  <script src="core/core.module.js"></script>
+
+  <!-- Ressource Agent -->
+  <script src="core/agent/agent.module.js"></script>
+  <script src="core/agent/agent.service.js"></script>
+
+  <!-- Ressource Mission -->
+  <script src="core/mission/mission.module.js"></script>
+  <script src="core/mission/mission.service.js"></script>
+
+  <!-- Composant MissionList -->
+  <script src="mission-list/mission-list.module.js"></script>
+  <script src="mission-list/mission-list.component.js"></script>
+
+  <!-- Composant MissionDetail -->
+  <script src="mission-detail/mission-detail.module.js"></script>
+  <script src="mission-detail/mission-detail.component.js"></script>
+</head>
+
+<body>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <p class="navbar-text navbar-left">demiNEO v0.2</p>
+  </nav>
+  <div ng-view></div>
+</body>
+</html>
